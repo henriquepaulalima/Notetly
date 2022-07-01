@@ -1,0 +1,19 @@
+/* section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+} */
+
+.card-actions {
+  justify-content: space-around;
+}
+
+.card-actions_btn:hover {
+  background: #c0c0c0!important;
+  cursor: pointer;
+}
+
+.card-actions_delete-btn:hover {
+  color: #c0c0c0;
+  cursor: pointer;
+}

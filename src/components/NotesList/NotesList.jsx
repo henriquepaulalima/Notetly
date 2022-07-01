@@ -1,28 +1,42 @@
-import { Button, Card, CardActions, CardContent, Typography } from '@mui/material';
 import React, { Component } from 'react';
 import './NotesList.css';
-import DeleteIcon from '@mui/icons-material/Delete';
+import NoteCard from '../NoteCard';
 
 class NotesList extends Component {
-  state = {}
+  constructor() {
+    super();
+    this.state = { notes: [] };
+    this._newNotes = this._newNotes.bind(this);
+  }
+
+  componentDidMount() {
+    this.props.notes.assign(this._newNotes);
+  }
+
+  componentWillUnmount() {
+    this.props.notes.unassign(this._newNotes);
+  }
+
+  _newNotes(notes) {
+    this.setState({ ...this.state, notes });
+  }
+
   render() {
     return (
-      <section>
-        <Card sx={{ p: 2, m: 2, width: 300, backgroundColor: '#212121' }}>
-          <CardActions className='card-actions'>
-            <Button className='card-actions_btn' variant="contained" sx={{ color: '#000', background: '#fff' }} >Card details</Button>
-            <DeleteIcon className='card-actions_delete-btn' sx={{ color: '#fff' }} />
-          </CardActions>
-          <CardContent>
-            <Typography variant="h6" component="div" sx={{ color: '#fff' }} gutterBottom>
-              Title
-            </Typography>
-            <Typography variant="body1" sx={{ color: '#c0c0c0' }} gutterBottom>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus varius finibus pharetra. Morbi varius, purus nec faucibus tincidunt, dui neque volutpat metus, quis dapibus risus magna in urna.
-            </Typography>
-          </CardContent>
-        </Card>
-      </section>
+      <ul>
+        {this.state.notes.map((note, index) => {
+          return (
+            <li key={index}>
+              <NoteCard
+                index={index}
+                deleteNote={this.props.deleteNote}
+                title={note.title}
+                content={note.content}
+              />
+            </li>
+          );
+        })}
+      </ul>
     );
   }
 }
