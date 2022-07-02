@@ -1,9 +1,3 @@
-/* section {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-} */
-
 .card-actions {
   justify-content: space-around;
 }
